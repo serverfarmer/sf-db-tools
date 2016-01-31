@@ -31,8 +31,8 @@ else
 	path=`dirname $file`
 fi
 
-srckey=`ssh_management_key_storage_filename $srchost`
-dstkey=`ssh_management_key_storage_filename $dsthost`
+srckey=`ssh_dedicated_key_storage_filename $srchost root`
+dstkey=`ssh_dedicated_key_storage_filename $dsthost root`
 
 if [ $COMPRESS = 1 ]; then
 	ssh -i $srckey root@$srchost /bin/gzip -9 $file

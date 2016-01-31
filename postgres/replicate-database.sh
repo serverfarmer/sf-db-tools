@@ -37,8 +37,8 @@ pass=$5
 path="/opt/sf-db-tools/postgres"
 file="/tmp/replicate.$RANDOM.sql"
 
-srckey=`ssh_management_key_storage_filename $srchost`
-dstkey=`ssh_management_key_storage_filename $dsthost`
+srckey=`ssh_dedicated_key_storage_filename $srchost root`
+dstkey=`ssh_dedicated_key_storage_filename $dsthost root`
 
 echo "dumping source database"
 if [ $DROP = 1 ]; then
