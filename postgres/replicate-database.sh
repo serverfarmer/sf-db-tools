@@ -34,7 +34,7 @@ db=$3
 user=$4
 pass=$5
 
-path="/opt/sf-db-tools/postgres"
+path="/opt/farm/ext/db-tools/postgres"
 file="/tmp/replicate.$RANDOM.sql"
 
 srckey=`ssh_dedicated_key_storage_filename $srchost root`
@@ -48,7 +48,7 @@ else
 if
 
 echo "compressing dump file and preparing to transfer it from source to target host"
-/opt/sf-db-tools/utils/copy-file.sh --compress --remove-source-file $srchost $dsthost $file
+/opt/farm/ext/db-tools/utils/copy-file.sh --compress --remove-source-file $srchost $dsthost $file
 
 if [ $CREATE = 1 ]; then
 	echo "creating target database and user"

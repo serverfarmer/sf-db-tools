@@ -40,7 +40,7 @@ else
 	dstpass=$5
 fi
 
-path="/opt/sf-db-tools/mysql"
+path="/opt/farm/ext/db-tools/mysql"
 file="/tmp/replicate.$RANDOM.sql"
 
 srckey=`ssh_dedicated_key_storage_filename $srchost root`
@@ -50,7 +50,7 @@ echo "dumping source database"
 ssh -i $srckey root@$srchost $path/dump-database.sh $file $db $user $srcpass
 
 echo "compressing dump file and preparing to transfer it from source to target host"
-/opt/sf-db-tools/utils/copy-file.sh --compress --remove-source-file $srchost $dsthost $file
+/opt/farm/ext/db-tools/utils/copy-file.sh --compress --remove-source-file $srchost $dsthost $file
 
 if [ $CREATE = 1 ]; then
 	echo "creating target database and user"
