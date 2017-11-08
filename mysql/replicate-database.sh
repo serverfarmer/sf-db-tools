@@ -1,5 +1,6 @@
 #!/bin/bash
 . /opt/farm/scripts/functions.custom
+. /opt/farm/scripts/functions.keys
 # replicate mysql database from one server to another
 # both remote servers need to have ssh management keys installed
 

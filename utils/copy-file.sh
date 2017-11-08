@@ -1,5 +1,6 @@
 #!/bin/bash
 . /opt/farm/scripts/functions.custom
+. /opt/farm/scripts/functions.keys
 # copy given file between 2 remote hosts
 
 
