@@ -14,4 +14,5 @@ elif [ -f /usr/local/directadmin/conf/mysql.conf ]; then
 	access="-u $user -p$pass"
 fi
 
-echo "show databases;" |mysql $access |egrep -v "^(Database|mysql|test|information_schema|performance_schema)$"
+warn="Using a password"
+echo "show databases;" |mysql $access 2>&1 |egrep -v "^(Database|mysql|test|information_schema|performance_schema)$" |grep -v "$warn"

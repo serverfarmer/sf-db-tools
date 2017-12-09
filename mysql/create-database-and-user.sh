@@ -19,6 +19,7 @@ fi
 
 rootpass="`cat /etc/mysql/debian.cnf |grep password |tail -n1 |sed s/password\ =\ //g`"
 access="-u debian-sys-maint -p$rootpass"
+warn="Using a password"
 
 db=$1
 user=$2
@@ -30,6 +31,6 @@ else
 	acl=localhost
 fi
 
-echo "create database $db;" |mysql $access
-echo "grant all privileges on $db.* to $user@$acl identified by '$pass';" |mysql $access
-echo "flush privileges;" |mysql $access
+echo "create database $db;" |mysql $access 2>&1 |grep -v "$warn"
+echo "grant all privileges on $db.* to $user@$acl identified by '$pass';" |mysql $access 2>&1 |grep -v "$warn"
+echo "flush privileges;" |mysql $access 2>&1 |grep -v "$warn"
