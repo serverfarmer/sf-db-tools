@@ -1,6 +1,5 @@
 #!/bin/bash
 . /opt/farm/scripts/functions.custom
-. /opt/farm/scripts/functions.keys
 # replicate postgresql database from one server to another
 # both remote servers need to have ssh management keys installed
 
