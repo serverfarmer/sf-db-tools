@@ -1,9 +1,9 @@
 #!/bin/bash
 . /opt/farm/scripts/functions.net
+. /opt/farm/ext/db-utils/functions.mysql
 # create new mysql database and user will full permissions to create/alter/drop tables/views/etc.
 # - suitable for development/testing/integration purposes
 # - NOT suitable for production purposess, or in case your database holds sensitive data
-
 
 
 if [ "$3" = "" ]; then
@@ -12,13 +12,17 @@ if [ "$3" = "" ]; then
 elif [ "$4" != "" ] && [ "$4" != "%" ] && [ "`resolve_host $4`" = "" ]; then
 	echo "error: parameter $4 not conforming hostname format, or given hostname is invalid"
 	exit 1
-elif [ ! -f /etc/mysql/debian.cnf ] || [ ! -f /var/run/mysqld/mysqld.pid ]; then
-	echo "error: debian-sys-maint password not found"
+fi
+
+rootuser=`mysql_local_user`
+rootpass=`mysql_local_password`
+
+if [ "$rootuser" = "" ]; then
+	echo "error: mysql-server credentials cannot be discovered"
 	exit 1
 fi
 
-rootpass="`cat /etc/mysql/debian.cnf |grep password |tail -n1 |sed s/password\ =\ //g`"
-access="-u debian-sys-maint -p$rootpass"
+access="-u $rootuser -p$rootpass"
 warn="Using a password"
 
 db=$1
