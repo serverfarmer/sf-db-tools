@@ -1,5 +1,5 @@
 #!/bin/bash
-. /opt/farm/scripts/functions.net
+. /opt/farm/ext/net-utils/functions
 . /opt/farm/ext/db-utils/functions.mysql
 # create new mysql database and user will full permissions to create/alter/drop tables/views/etc.
 # - suitable for development/testing/integration purposes
