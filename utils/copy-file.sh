@@ -1,5 +1,4 @@
-#!/bin/bash
-. /opt/farm/scripts/functions.custom
+#!/bin/sh
 # copy given file between 2 remote hosts
 
 
@@ -31,8 +30,8 @@ else
 	path=`dirname $file`
 fi
 
-srckey=`ssh_dedicated_key_storage_filename $srchost root`
-dstkey=`ssh_dedicated_key_storage_filename $dsthost root`
+srckey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $srchost root`
+dstkey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $dsthost root`
 
 if [ $COMPRESS = 1 ]; then
 	ssh -i $srckey root@$srchost /bin/gzip -9 $file

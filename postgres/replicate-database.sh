@@ -1,5 +1,4 @@
-#!/bin/bash
-. /opt/farm/scripts/functions.custom
+#!/bin/sh
 # replicate postgresql database from one server to another
 # both remote servers need to have ssh management keys installed
 
@@ -37,8 +36,8 @@ pass=$5
 path="/opt/farm/ext/db-tools/postgres"
 file="/tmp/replicate.$RANDOM.sql"
 
-srckey=`ssh_dedicated_key_storage_filename $srchost root`
-dstkey=`ssh_dedicated_key_storage_filename $dsthost root`
+srckey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $srchost root`
+dstkey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $dsthost root`
 
 echo "dumping source database"
 if [ $DROP = 1 ]; then
