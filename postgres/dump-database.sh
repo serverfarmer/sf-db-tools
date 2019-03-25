@@ -15,7 +15,7 @@ file=$1
 db=$2
 
 if [ $DROP = 1 ]; then
-	sudo -u postgres pg_dump -c -i $db >$file
+	sudo -u postgres pg_dump -c $db >$file
 else
-	sudo -u postgres pg_dump -i $db >$file
+	sudo -u postgres pg_dump $db >$file
 fi
