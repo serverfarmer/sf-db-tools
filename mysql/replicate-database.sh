@@ -46,7 +46,7 @@ srckey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $srchost root`
 dstkey=`/opt/farm/ext/keys/get-ssh-dedicated-key.sh $dsthost root`
 
 echo "dumping source database"
-ssh -i $srckey root@$srchost $path/dump-database.sh $file $db $user $srcpass
+ssh -i $srckey root@$srchost "mysqldump --skip-lock-tables -u $user -p$srcpass $db >$file"
 
 echo "compressing dump file and preparing to transfer it from source to target host"
 /opt/farm/ext/db-tools/utils/copy-file.sh --compress --remove-source-file $srchost $dsthost $file

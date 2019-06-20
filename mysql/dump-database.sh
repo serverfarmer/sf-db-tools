@@ -1,13 +1,19 @@
 #!/bin/sh
+. /opt/farm/ext/db-utils/functions.mysql
 
-if [ "$4" = "" ]; then
-	echo "usage: $0 <file> <db> <login> <password>"
+if [ "$2" = "" ]; then
+	echo "usage: $0 <file> <db>"
 	exit 1
 fi
 
 file=$1
 db=$2
-user=$3
-pass=$4
+user=`mysql_local_user`
 
-mysqldump --skip-lock-tables -u $user -p$pass $db >$file
+if [ "$user" != "" ]; then
+	pass=`mysql_local_password`
+	mysqldump --skip-lock-tables -u $user -p$pass $db >$file
+else
+	echo "error: mysql-server credentials cannot be discovered"
+	exit 1
+fi
