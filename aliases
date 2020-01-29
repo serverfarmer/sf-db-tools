@@ -1,0 +1,2 @@
+mysql/console.sh:sf-mysql
+postgres/console.sh:sf-pgsql
